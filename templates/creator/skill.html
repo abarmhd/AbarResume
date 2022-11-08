@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+Skills
+{% endblock %}
+
+{% block active_creator %}
+active
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h1>
+      Create
+      <small>Abar Rezome</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'search_home' %}"><i class="fa fa-dashboard"></i>Search</a></li>
+        <li><a href="{% url 'creator_home' %}"></i>Create</a></li>
+        <li><a href="#"></i>Skills</a></li>
+    </ol>
+  </section>
+  <div class="row">
+    <table class="table table-bordered" style="margin: 15px">
+      <thead>
+        <tr>
+          <th>Skill</th>
+          <th>Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in skill %}
+          <tr>
+            <td>{{ i.skill }}</td>
+            <td>{{ i.level }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="content" style="margin: 10px;">
+      <form action="" method="post">
+        {{ form.management_form }}
+        <div class="form-group">
+          {% for field in form %}
+            {{ field.label_tag }}
+            {{ field }} 
+            <b style="color:red;">
+              {{ field.errors }}
+            </b>
+            <br>
+          {% endfor %}
+        </div>
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+      <div style="float: left;">
+        <a href="{% url 'creator_experience' resume_id %}" class="btn btn-warning">Previous</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

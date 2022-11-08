@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+Generate
+{% endblock %}
+
+{% block active_contact %}
+active
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h1>
+        Contact
+        <small>Abar Rezome</small>
+      </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'search_home' %}"><i class="fa fa-dashboard"></i>Search</a></li>
+      <li><a href="#"></i>Generate</a></li>
+    </ol>
+  </section>
+  <div class="row">
+    <div class="content" style="margin: 10px;">
+      <form action="" method="post">
+        <div class="form-group">
+          {% for field in form %}
+            {{ field.label_tag }}
+            {{ field }} 
+            <b style="color:red;">
+              {{ field.errors }}
+            </b>
+            <br>
+          {% endfor %}
+        </div>
+        {% csrf_token %}
+        <button class="btn btn-warning" type="submit">subimt</button>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

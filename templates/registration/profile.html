@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+Profile Detail - AbarRezome
+{% endblock %}
+{% block active_profile %}
+active
+{% endblock %}
+
+
+{% block content %}
+<section class="content-header">
+    <h1>
+      Profile Detail
+      <small>Abar Rezome</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'search_home' %}"><i class="fa fa-dashboard"></i>Search</a></li>
+        <li><a href="#"></i>Profile Detail</a></li>
+    </ol>
+  </section>
+  <div class="content" style="margin:0px 10px ;">
+    <div class="row col-md-6">
+      </div>
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Profile Detail</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <table class="table table-condensed">
+              <tbody><tr>
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+              </tr>
+              <tr>
+                <td>{{ user }}</td>
+                <td> {{ user.first_name }}</td>
+                <td>{{ user.last_name }}
+                </td>
+                <td>{{ user.email }}</td>
+              </tr>
+            
+            </tbody></table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        
+        <a href="{% url 'profile_edit' %}">Edit Profile</a>
+  </div>
+
+{% endblock %}

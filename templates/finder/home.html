@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+home
+{% endblock %}
+
+{% block active_dashboard %}
+active
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+  <h1>
+    Search
+    <small>Abar Rezome</small>
+  </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i>Search</a></li>
+    </ol>
+  </section>
+  <section class="content-header">
+    <div class="jubotron my-2">
+      <form action="" method="get">
+        <div class="col-md-3 mb-3">
+          <input type="text" name="name" class="form-control" value="{{ par.name }}" placeholder="Name">
+        </div>
+        <div class="col-md-3 mb-3">
+          <input type="text" name="family" class="form-control" value="{{ par.family }}" placeholder="Family">
+        </div>
+        <div class="col-md-3 mb-3">
+          <input type="number" name="age" min="14" class="form-control" value="{{ par.age }}" placeholder="Age">
+        </div>
+        <div class="col-md-3 mb-3">
+          <select name="gender" class="form-control">
+            <option selected disabled >Gender</option>
+            {% for i in gender %}
+            <option  value="{{ i.id }}"
+            {% if i.id|slugify == par.gender %}selected{% endif %}
+            >{{ i.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <br><br>
+        <div class="col-md-6 mb-6">
+          <select name="education" class="form-control">
+            <option selected disabled>Education</option>
+            {% for i in educations %}
+            <option value="{{ i.id }}">{{ i.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6 mb-6">
+          <select name="skill" class="form-control">
+            <option selected disabled>Skills</option>
+            {% for i in skills %}
+            <option value="{{ i.id }}"
+            {% if i.id|slugify == par.skill %}selected{% endif %}>{{ i.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <br><br>
+        <div class="col-md-3 mb-3">
+         <input type="number" min="0" name="company_count" value="{{ par.company_count }}" class="form-control" placeholder="Companies Count">
+        </div>
+        <div class="col-md-3 mb-3">
+          <select name="working_now" class="form-control">
+            <option selected disabled>Working Now</option>
+            <option value="1" {% if par.working_now == "1" %}selected{% endif %}>Working</option>
+            <option value="2" {% if par.working_now == "2" %}selected{% endif %}>Free</option>
+            <option value="-1" {% if par.working_now == "-1" %}selected{% endif %}>Unknown</option>
+          </select>
+        </div>
+        <br><br>
+        <input type="submit" class="btn btn-success form-control" value="Search">
+      </form>
+    </div>
+  </section>
+  <div class="content">
+    <div class="row">
+    {% for i in resume %}
+    <div class="col-md-4">
+      <!-- Widget: user widget style 1 -->
+      <div class="box box-widget widget-user">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header " style="background-color: blue center center;">
+          <a href="{% url 'profile_detail' i.id %}">
+            <h3 class="widget-user-username">{{ i.name }}</h3>
+          <h5 class="widget-user-desc">{{ i.family }}</h5>
+          </a>
+        </div>
+        <div class="widget-user-image">
+          <img class="img-circle" src="{{ i.picture.url }}" alt="User Avatar {{ i.id }}">
+
+        </div>
+        <div class="box-footer">
+          <div class="row">
+            <div class="col-sm-4 border-right">
+              <div class="description-block">
+                <h5 class="description-header">{{ i.age }}</h5>
+                <span class="description-text">Age</span>
+              </div>
+              <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 border-right">
+              <div class="description-block">
+                <h5 class="description-header">{{ i.sex }}</h5>
+                <span class="description-text">Sex</span>
+              </div>
+              <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4">
+              <div class="description-block">
+                <h5 class="description-header">{{ i.resume_education.last.education.title }}</h5>
+                <span class="description-text">Education</span>
+              </div>
+              <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+      </div>
+      <!-- /.widget-user -->
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

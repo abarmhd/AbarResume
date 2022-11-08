@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+Experience
+{% endblock %}
+
+{% block active_creator %}
+active
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h1>
+      Create
+      <small>Abar Rezome</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'search_home' %}"><i class="fa fa-dashboard"></i>Search</a></li>
+        <li><a href="{% url 'creator_home' %}"></i>Create</a></li>
+        <li><a href="#"></i>Experience</a></li>
+    </ol>
+  </section>
+  <div class="row">
+    <table class="table table-bordered" style="margin: 15px">
+      <thead>
+        <tr>
+          <th>company</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Working Now</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in exper %}
+          <tr>
+            <td>{{ i.Company }}</td>
+            <td>{{ i.start_date }}</td>
+            <td>{{ i.end_date }}</td>
+            <td>{{ i.working_now }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="content" style="margin: 10px;">
+      <form action="" method="post">
+        <div class="form-group">
+          {{ form.media }}
+            {{ form.resume.label_tag }}
+            {{ form.resume }} 
+            <b style="color:red;">
+              {{ form.resume.errors }}
+            </b>
+            <br>
+            {{ form.Company.label_tag }}
+            {{ form.Company }} 
+            <b style="color:red;">
+              {{ form.Company.errors }}
+            </b>
+            <br>
+            {{ form.start_date.label_tag }}
+            {{ form.start_date }} 
+            <b style="color:red;">
+              {{ form.start_date.errors }}
+            </b>
+            <br>
+            {{ form.end_date.label_tag }}
+            {{ form.end_date }} 
+            <b style="color:red;">
+              {{ form.end_date.errors }}
+            </b>
+            <br>
+            {{ form.working_now.label_tag }}
+            {{ form.working_now }} 
+            <b style="color:red;">
+              {{ form.working_now.errors }}
+            </b>
+            <br>
+        </div>
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+      <div style="float: left;">
+        <a href="{% url 'creator_skills' resume_id %}" class="btn btn-primary">Next</a>
+        <a href="{% url 'creator_education' resume_id %}" class="btn btn-warning">Previous</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

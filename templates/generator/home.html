@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+Generate
+{% endblock %}
+
+{% block active_generate %}
+active
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h1>
+        Generate
+        <small>Abar Rezome</small>
+      </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'search_home' %}"><i class="fa fa-dashboard"></i>Search</a></li>
+      <li><a href="#"></i>Generate</a></li>
+    </ol>
+  </section>
+  <section class="invoice">
+    <!-- title row -->
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="page-header">
+          <img src="{{ resume.picture.url }}" style="width: 60px;" alt=""> {{ resume.user.get_full_name }}
+          <small class="pull-left">Last Login: {{ resume.user.last_login }}</small>
+        </h1>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- info row -->
+    <div class="row invoice-info">
+      <div class="col-sm-1 invoice-col">
+        Age:
+        
+          <strong>{{ resume.age }}</strong><br>
+          
+      </div>
+      <div class="col-sm-6 invoice-col">
+        
+          address:
+          <strong>{{ resume.address }}</strong>
+          
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-3 invoice-col">
+        
+          <strong>Linkedin URL:</strong>
+          <a href="{{ resume.linkedin_url }}">{{ resume.linkedin_url }}</a>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-2 invoice-col">
+        
+        <b>Sex :</b> {{ resume.sex }}
+        
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row --><hr>
+    <div class="row">
+      <div class="col-xs-5 table-responsive">
+        <table class="table table-striped">
+          <h3>Skills</h3>
+          <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Level</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for i in skills %}
+          <tr>
+            <td>{{ i.skill }}</td>
+            <td><progress max="10" value="{{ i.level }}"></progress></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="col-xs-7">
+        {% if resume.resume_file %}
+        <img src="{{ resume.resume_file.url }}" width="100%">
+        {% endif %}
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <table class="table table-striped">
+        <h3>Educations</h3>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Education</th>
+          <th>Start Year</th>
+          <th>End Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in educations %}
+        <tr>
+          <td>{{ i.title }}</td>
+          <td>{{ i.education.title }}</td>
+          <td>{{ i.start_year }}</td>
+          <td>{{ i.end_year }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+      <div class="row">
+      <table class="table table-striped">
+        <h3>Experience</h3>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Working Now?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in experience %}
+        <tr>
+          <td>{{ i.Company }}</td>
+          <td>{{ i.start_date }}</td>
+          <td>{{ i.end_date }}</td>
+          <td>{{ i.working_now }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+      
+
+
+{% endblock %}

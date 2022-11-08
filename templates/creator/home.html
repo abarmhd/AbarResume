@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Rezome Edit - {{ form.instance.id|default:'Rezome Create' }}
+{% endblock %}
+{% block active_creator %}
+active
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h1>
+      {% if form.instance.name %}
+      Edit
+      {% else %}
+      Create
+      {% endif %}
+      <small>Abar Rezome</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'search_home' %}"><i class="fa fa-dashboard"></i>Search</a></li>
+        <li><a href="#"></i>{% if form.instance.name %}
+          Edit
+          {% else %}
+          Create
+          {% endif %}</a></li>
+    </ol>
+  </section>
+  <div class="row">
+    <div class="content" style="margin: 10px;">
+      <form enctype="multipart/form-data" action="" method="post">
+        <div class="form-group">
+          {% for field in form %}
+            {{ field.label_tag }}
+            {{ field }} 
+            <b style="color:red;">
+              {{ field.errors }}
+            </b>
+            <br>
+          {% endfor %}
+        </div>
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+      <hr>
+      <div style="float: left;">
+        {% if form.instance.name %}
+          <a href="{% url 'creator_education' resume_id=form.instance.id %}" class="btn btn-primary">Next</a>
+          {% else %}
+          {% endif %}
+      </div>
+    </div>
+    
+  </div>
+
+{% endblock %}

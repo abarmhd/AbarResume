@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+Educations
+{% endblock %}
+
+{% block active_creator %}
+active
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h1>
+      Create
+      <small>Abar Rezome</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'search_home' %}"><i class="fa fa-dashboard"></i>Search</a></li>
+        <li><a href="{% url 'creator_home' %}"></i>Create</a></li>
+        <li><a href="#"></i>Educations</a></li>
+    </ol>
+  </section>
+  <hr>
+  <div class="row">
+    <table class="table table-bordered" style="margin: 15px">
+      <thead>
+        <tr>
+          <th>Educations</th>
+          <th>Title</th>
+          <th>Start Year</th>
+          <th>End Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in educations %}
+          <tr>
+            <td>{{ i.education }}</td>
+            <td>{{ i.title }}</td>
+            <td>{{ i.start_year }}</td>
+            <td>{{ i.end_year }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="content" style="margin: 10px;">
+      <form action="" method="post">
+        <div class="form-group">
+          {% for field in form %}
+            {{ field.label_tag }}
+            {{ field }} 
+            <b style="color:red;">
+              {{ field.errors }}
+            </b>
+            <br>
+          {% endfor %}
+        </div>
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+      <div style="float: left;">
+        <a href="{% url 'creator_experience' resume_id=resume_id %}" class="btn btn-primary">Next</a>
+        <a href="{% url 'creator_edit_home' resume_id=resume_id %}" class="btn btn-warning">Previous</a>
+      </div>
+    </div>
+    
+  </div>
+
+{% endblock %}
